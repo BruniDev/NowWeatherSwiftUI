@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoadingView: View {
     
-    // MARK: - BODY
+
     var body: some View {
         ZStack {
             Color.gray
@@ -18,8 +18,8 @@ struct LoadingView: View {
                 ProgressView()
                     .tint(Color.indigo)
                 Text("Loading data...")
-            }//: VStack
-        }//: Zstack
+            }
+        }
     }
 }
 

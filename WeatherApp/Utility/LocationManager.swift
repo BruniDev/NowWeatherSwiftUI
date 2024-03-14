@@ -25,8 +25,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate, LocationManagerProto
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization() // Request permission to use location services
-        locationManager.startUpdatingLocation() // Start receiving location updates
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -41,7 +41,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, LocationManagerProto
     }
     
     func requestLocation() {
-        // Use this method to request a one-time location update
+
         locationManager.requestLocation()
     }
 }
