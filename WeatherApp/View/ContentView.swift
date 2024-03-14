@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+
+    @StateObject var viewModel: WeatherInfoViewModel = WeatherInfoViewModel(
+        webservice: NetworkService()
+    )
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            WeatherView(viewModel: viewModel)
         }
-        .padding()
-    }
 }
 
 #Preview {

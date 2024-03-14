@@ -7,12 +7,53 @@
 
 import SwiftUI
 
-struct LocationVIew: View {
+struct LocationView: View {
+    
+   
+    @State private var cityName: String = ""
+    var cityNameClosure: (_ cityName: String) -> Void
+    @Binding var isPresented: Bool
+    
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color.gray
+                .ignoresSafeArea()
+            VStack(alignment: .center) {
+                
+                HStack {
+                    Text("")
+                        .padding(.horizontal, 8)
+                    TextField("Seoul", text: $cityName)
+                        .textFieldStyle(.plain)
+                }
+                .frame(height: 50)
+                .background(Color.white)
+                .clipShape(.capsule)
+                
+                Button {
+                    if !cityName.isEmpty {
+                        cityNameClosure(cityName)
+                        isPresented = false
+                    }
+                } label: {
+                    Text("날씨 조회하기")
+                        .font(.title2)
+                        .foregroundStyle(Color.white)
+                        .padding(.horizontal, 20)
+                }
+                .buttonStyle(.bordered)
+                .tint(.black)
+                .clipShape(.capsule)
+                .padding(.vertical, 20)
+                
+                Spacer()
+            }
+            .padding([.horizontal, .vertical], 24)
+        }
     }
 }
 
 #Preview {
-    LocationVIew()
+    LocationView(cityNameClosure: {_ in }, isPresented: .constant(true))
 }
