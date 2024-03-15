@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WeatherView: View {
     
+    @StateObject private var weatherKitViewModel = WeatherKitViewModel()
     
     @StateObject var viewModel: WeatherInfoViewModel
     @State private var showingSheet = false
@@ -45,9 +46,10 @@ struct WeatherView: View {
                 
                 
                 VStack(alignment: .center) {
-                    
-                    Text("\(viewModel.temp)°")
+                    Text("\(weatherKitViewModel.currentTemperature)")
                         .font(.system(size: 100,weight: .bold))
+                    Text("\(weatherKitViewModel.currentCondition)")
+                        .font(.system(size: 20,weight: .regular))
                     WeatherUtils.getWeatherIcon(condition:viewModel.conditionId)
                         .resizable()
                         .frame(width: 250,height: 200)
@@ -60,7 +62,7 @@ struct WeatherView: View {
             .padding()
             .refreshable {
                 viewModel.locationManager.requestLocation()
-            }
+            } 
         }
     }
 }
