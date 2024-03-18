@@ -11,8 +11,14 @@ import CoreLocation
 class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     @Published var authorizationStatus : CLAuthorizationStatus?
-    @Published var lastLocation : CLLocation?
-    @Published var errorMessage: String?
+    
+    var latitude : Double {
+        locationManager.location?.coordinate.latitude ?? 0.0
+    }
+    
+    var longtitude : Double {
+        locationManager.location?.coordinate.longitude ?? 0.0
+    }
     
     override init(){
         super.init()
@@ -46,13 +52,11 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.lastLocation = locations.last
         locationManager.stopUpdatingLocation()
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error location")
-        errorMessage = error.localizedDescription
     }
 }

@@ -9,13 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-
-    @StateObject var viewModel: WeatherInfoViewModel = WeatherInfoViewModel(
-        webservice: NetworkService()
-    )
-
     var body: some View {
-            WeatherView(viewModel: viewModel)
+           WeatherView()
         }
 }
 
