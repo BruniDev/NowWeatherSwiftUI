@@ -9,15 +9,15 @@ import Foundation
 import SwiftUI
 
 struct WeatherUtils {
-    static func getWeatherIcon(condition: Int) -> Image {
-     if (condition < 400) {
-        return Image("cloud")
-      } else if (condition < 600) {
-        return Image("rainy")
-      } else if (condition < 700) {
+    static func getWeatherBackground(condition: String) -> Image {
+     if condition == "Mostly Cloudy" || condition == "partlyCloudy" || condition == "cloudy"{
+        return Image("cloudy")
+      } else if condition == "strongStorms" || condition == "thunderstorms"{
+        return Image("storm")
+      } else if condition == "snow" {
         return Image("snowy")
       } else {
-          return Image("sunny")
+          return Image("sun")
       }
     }
 

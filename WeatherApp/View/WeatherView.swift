@@ -6,19 +6,23 @@
 //
 
 import SwiftUI
+import WeatherKit
+
 
 struct WeatherView: View {
 
     @ObservedObject var weatherKitManager = WeatherKitManager()
     @State private var showingSheet = false
     @StateObject var locationManager = LocationManager()
+    var weatherUtils = WeatherUtils()
     
     var body: some View {
-        ScrollView{
-            if locationManager.authorizationStatus == .authorizedWhenInUse {
-                ZStack(alignment: .leading) {
-                    Color.white
-                        .ignoresSafeArea()
+        ZStack {
+            WeatherUtils.getWeatherBackground(condition: weatherKitManager.weatherCondition)
+                .resizable()
+                .ignoresSafeArea()
+                    ScrollView{
+                        if locationManager.authorizationStatus == .authorizedWhenInUse {
                     VStack {
                             HStack{
                                 VStack{
@@ -36,6 +40,7 @@ struct WeatherView: View {
                             }
                         }
                         Text("현재 날씨 상태 : \(weatherKitManager.weatherCondition)")
+                        
                         HStack{
                             ForEach(weatherKitManager.hourlyForecast,id: \.self){ condition in
                                Text(condition)
@@ -44,11 +49,13 @@ struct WeatherView: View {
                         
                     }
                 }
+                        else {
+                            Text("Error")
+                        }
             }
-            else {
-                Text("Error")
-            }
+          
         }
+       
     }
 }
 
