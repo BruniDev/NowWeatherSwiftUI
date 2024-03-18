@@ -65,10 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				7B8BA1792BA4270A004B6788 /* WeatherApp.entitlements */,
-				7B8BA16E2BA0B156004B6788 /* ViewModel */,
 				7B8BA15F2BA0AC7D004B6788 /* View */,
 				7B3F3B7F2BA0A79000875CDF /* Utility */,
-				7B3F3B7C2BA0A4AE00875CDF /* Model */,
 				7B3F3B6E2BA0A01300875CDF /* WeatherAppApp.swift */,
 				7B3F3B722BA0A01500875CDF /* Assets.xcassets */,
 				7B3F3B742BA0A01500875CDF /* Preview Content */,
@@ -82,13 +80,6 @@
 				7B3F3B752BA0A01500875CDF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		7B3F3B7C2BA0A4AE00875CDF /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		7B3F3B7F2BA0A79000875CDF /* Utility */ = {
@@ -110,13 +101,6 @@
 				7B8BA1712BA0B1DF004B6788 /* LocationView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		7B8BA16E2BA0B156004B6788 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
