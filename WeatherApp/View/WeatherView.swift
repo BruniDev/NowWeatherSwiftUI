@@ -8,63 +8,50 @@
 import SwiftUI
 
 struct WeatherView: View {
-    
-    
-    @StateObject var viewModel: WeatherInfoViewModel
+
+    @ObservedObject var weatherKitManager = WeatherKitManager()
     @State private var showingSheet = false
+    @StateObject var locationManager = LocationManager()
     
     var body: some View {
-        ZStack(alignment: .leading) {
-            Color.white
-            
-                .ignoresSafeArea()
-            
-            VStack {
-                
-                HStack {
-                    Spacer()
-                    // MARK: - 도시검색 버튼
-                    Button {
-                        showingSheet.toggle()
-                    } label: {
-                        Image(systemName: "magnifyingglass.circle.fill")
-                            .font(.system(size: 30))
-                            .fontWeight(.heavy)
-                    }
-                    .sheet(isPresented: $showingSheet) {
-                        LocationView(cityNameClosure: { cityName in
-                            viewModel.getWeather(by: cityName)
-                        }, isPresented: $showingSheet)
-                        .presentationDragIndicator(.visible)
-                        .presentationDetents([.height(200)])
+        ScrollView{
+            if locationManager.authorizationStatus == .authorizedWhenInUse {
+                ZStack(alignment: .leading) {
+                    Color.white
+                        .ignoresSafeArea()
+                    VStack {
+                            HStack{
+                                VStack{
+                                    Text("현재 온도: \(weatherKitManager.temp)")
+                                        .task {
+                                            await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
+                                        }
+                                        .font(.system(size: 50,weight: .semibold))
+                                    Text("체감 온도: \(weatherKitManager.realtemp)")
+                                        .tint(.black)
+                                }
+                            
+                            VStack{
+                              Text("최고기온")
+                            }
+                        }
+                        Text("현재 날씨 상태 : \(weatherKitManager.weatherCondition)")
+                        HStack{
+                            ForEach(weatherKitManager.hourlyForecast,id: \.self){ condition in
+                               Text(condition)
+                            }
+                        }
+                        
                     }
                 }
-                .tint(.black)
-                
-                Spacer()
-                
-                
-                VStack(alignment: .center) {
-                    
-                    Text("\(viewModel.temp)°")
-                        .font(.system(size: 100,weight: .bold))
-                    WeatherUtils.getWeatherIcon(condition:viewModel.conditionId)
-                        .resizable()
-                        .frame(width: 250,height: 200)
-                    
-                }
-                Spacer()
-                Text("\(viewModel.name)")
-                    .font(.system(size: 60))
             }
-            .padding()
-            .refreshable {
-                viewModel.locationManager.requestLocation()
+            else {
+                Text("Error")
             }
         }
     }
 }
 
-#Preview {
-    WeatherView(viewModel: WeatherInfoViewModel())
-}
+//#Preview {
+//    WeatherView(viewModel: WeatherInfoViewModel())
+//}

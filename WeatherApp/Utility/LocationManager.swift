@@ -8,40 +8,55 @@
 import Foundation
 import CoreLocation
 
-protocol LocationManagerProtocol {
-    var userLocation: CLLocation? { get set }
-}
-
-class LocationManager: NSObject, CLLocationManagerDelegate, LocationManagerProtocol, ObservableObject {
-    private var locationManager = CLLocationManager()
+class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
+    var locationManager = CLLocationManager()
+    @Published var authorizationStatus : CLAuthorizationStatus?
     
-    @Published var userLocation: CLLocation?
-    
-    override init() {
-        super.init()
-        setupLocationManager()
+    var latitude : Double {
+        locationManager.location?.coordinate.latitude ?? 0.0
     }
     
-    func setupLocationManager() {
+    var longtitude : Double {
+        locationManager.location?.coordinate.longitude ?? 0.0
+    }
+    
+    override init(){
+        super.init()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            userLocation = location
-            locationManager.stopUpdatingLocation()
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse:
+            authorizationStatus = .authorizedWhenInUse
+            locationManager.requestLocation()
+            break
+            
+        case .restricted :
+            authorizationStatus = .restricted
+            break
+            
+        case .denied :
+            authorizationStatus = .denied
+            break
+            
+        case .notDetermined :
+            authorizationStatus = .notDetermined
+            manager.requestWhenInUseAuthorization()
+            break
+            
+        default:
+            break
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager.stopUpdatingLocation()
+        
     }
     
-    func requestLocation() {
-
-        locationManager.requestLocation()
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error location")
     }
 }
