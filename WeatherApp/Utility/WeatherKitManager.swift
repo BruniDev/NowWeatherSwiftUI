@@ -68,14 +68,14 @@ import WeatherKit
     
     var hourlyForecast : [String] {
         var arr = [String]()
-        weather?.hourlyForecast.forecast.forEach{
-            arr.append($0.condition.rawValue)
+        weather?.dailyForecast.forEach{
+            arr.append("날씨 \($0.symbolName), 최고기온 \($0.highTemperature), 최저기온 \($0.lowTemperature)")
         }
         
         return arr
     }
-   
-        
+    
+ 
        
     
 

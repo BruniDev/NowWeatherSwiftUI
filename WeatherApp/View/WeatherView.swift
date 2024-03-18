@@ -20,21 +20,26 @@ struct WeatherView: View {
                     Color.white
                         .ignoresSafeArea()
                     VStack {
-                        Text("현재 온도: \(weatherKitManager.temp)")
-                            .task {
-                                await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
-                            }
-                        Text("체감 온도: \(weatherKitManager.realtemp)")
-                            .tint(.black)
-                        
-                        Text("바람 속도: \(weatherKitManager.windSpeed)")
-                        Text("현재 날씨 상태 : \(weatherKitManager.weatherCondition)")
-                        Text("자외선 상황 : \(weatherKitManager.uvCondition)")
-                        Text("시야 : \(weatherKitManager.visibility)")
-                        
-                        ForEach(weatherKitManager.hourlyForecast,id: \.self){ condition in
-                            Text(condition)
+                            HStack{
+                                VStack{
+                                    Text("현재 온도: \(weatherKitManager.temp)")
+                                        .task {
+                                            await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
+                                        }
+                                        .font(.system(size: 50,weight: .semibold))
+                                    Text("체감 온도: \(weatherKitManager.realtemp)")
+                                        .tint(.black)
+                                }
                             
+                            VStack{
+                              Text("최고기온")
+                            }
+                        }
+                        Text("현재 날씨 상태 : \(weatherKitManager.weatherCondition)")
+                        HStack{
+                            ForEach(weatherKitManager.hourlyForecast,id: \.self){ condition in
+                               Text(condition)
+                            }
                         }
                         
                     }
