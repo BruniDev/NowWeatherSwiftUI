@@ -10,52 +10,65 @@ import WeatherKit
 
 
 struct WeatherView: View {
-
+    
     @ObservedObject var weatherKitManager = WeatherKitManager()
     @State private var showingSheet = false
     @StateObject var locationManager = LocationManager()
     var weatherUtils = WeatherUtils()
     
     var body: some View {
-        ZStack {
-            WeatherUtils.getWeatherBackground(condition: weatherKitManager.weatherCondition)
-                .resizable()
-                .ignoresSafeArea()
-                    ScrollView{
-                        if locationManager.authorizationStatus == .authorizedWhenInUse {
-                    VStack {
-                            HStack{
-                                VStack{
-                                    Text("현재 온도: \(weatherKitManager.temp)")
-                                        .task {
-                                            await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
-                                        }
-                                        .font(.system(size: 50,weight: .semibold))
-                                    Text("체감 온도: \(weatherKitManager.realtemp)")
-                                        .tint(.black)
-                                }
-                            
-                            VStack{
-                              Text("최고기온")
+        GeometryReader{ geometryReader in
+            ZStack {
+                WeatherUtils.getWeatherBackground(condition: weatherKitManager.weatherCondition)
+                    .resizable()
+                    .ignoresSafeArea()
+                if locationManager.authorizationStatus == .authorizedWhenInUse {
+                    VStack(alignment: .leading){
+                        Text("서울특별시 광진구")
+                            .task {
+                                await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
                             }
-                        }
-                        Text("현재 날씨 상태 : \(weatherKitManager.weatherCondition)")
+                            .position(x:geometryReader.size.width/3,y:geometryReader.size.height/10)
+                            .font(.system(size: 30,weight: .semibold))
                         
-                        HStack{
-                            ForEach(weatherKitManager.hourlyForecast,id: \.self){ condition in
-                               Text(condition)
+                        
+                        
+                        VStack{
+                            Text("\(Int(weatherKitManager.temp))")
+                                .font(.system(size: 75,weight: .bold))
+                            
+                            Text("\(Image(systemName: "arrowtriangle.up.fill"))\(Int(weatherKitManager.highestTemp))  \(Int(weatherKitManager.lowestTemp))\(Image(systemName: "arrowtriangle.down.fill"))")
+                                .font(.system(size: 20,weight: .semibold))
+                        }
+                        .position(x:geometryReader.size.width/6 * 5,y: -geometryReader.size.height/8)
+                        ScrollView(.horizontal) {
+                            HStack{
+                                ForEach(weatherKitManager.hourlyForecast,id: \.time){ condition in
+                                    VStack{
+                                        Text(condition.temperature)
+                                            .font(.system(size: 20,weight: .semibold))
+                                            .padding(1)
+                                        Image(systemName: condition.symbolName)
+                                            .padding(1)
+                                        Text(condition.time)
+                                            .font(.system(size: 20,weight: .semibold))
+                                    }
+                                    
+                                }
                             }
                         }
                         
                     }
                 }
-                        else {
-                            Text("Error")
-                        }
+                else {
+                    Text("Error")
+                }
+                
+                
+                
             }
-          
+            
         }
-       
     }
 }
 
