@@ -8,17 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum weather {
-    case blowingDust
-    case clear
-    case cloudy
-    case foggy
-    case haze
-    case mostlyClear
-    case mostlyCloudy
-    case partlyCloudy
-    case smoky
-}
 struct WeatherUtils {
     static func getWeatherBackground(condition: String) -> Image {
      if condition == "Mostly Cloudy" || condition == "Partly Cloudy" || condition == "Cloudy"{
@@ -31,5 +20,22 @@ struct WeatherUtils {
           return Image("sun")
       }
     }
-
+    
+    static func getWeatherIcon(condition: String) -> Image {
+        if condition == "cloud" || condition == "cloud.moon" || condition == "Cloudy"{
+           return Image("cloud_icon")
+         } else if condition == "cloud.rain" || condition == "rain" || condition == "cloud.moon.rain"{
+           return Image("rain_icon")
+         } else if condition == "wind" {
+           return Image("wind_icon")
+         } else if condition == "moon" {
+             return Image("moon_icon")
+         }
+        else if condition == "snow" {
+            return Image("snow_icon")
+        }
+        else {
+             return Image("sunny_icon")
+         }
+       }
 }

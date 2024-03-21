@@ -84,7 +84,7 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
 extension CLPlacemark {
 
     var address: String? {
-        if let name = name {
+        
             var result = ""
 
             if let country = country {
@@ -97,9 +97,9 @@ extension CLPlacemark {
     
 
             return result
-        }
+        
 
-        return nil
+       
     }
 
 }
