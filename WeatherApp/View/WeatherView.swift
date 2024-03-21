@@ -14,7 +14,7 @@ struct WeatherView: View {
     @ObservedObject var weatherKitManager = WeatherKitManager()
     @State private var showingSheet = false
     @StateObject var locationManager = LocationManager()
-    @State var texting = ""
+    @State var locationTitle = ""
     var weatherUtils = WeatherUtils()
     
     var body: some View {
@@ -29,22 +29,22 @@ struct WeatherView: View {
                             .task {
                                 self.locationManager.reverseGeocoding(latitude: locationManager.latitude, longitude: locationManager.longtitude) {address in
                                     print(address)
-                                    self.texting = address
+                                    self.locationTitle = address
                                 }
                                     await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
                                 }
-                        Text(texting)
+                        Text(locationTitle)
                                 .position(x:geometryReader.size.width/3,y:geometryReader.size.height/10)
-                                .font(.system(size: 30,weight: .semibold))
+                                .font(.system(size: 35,weight: .bold))
                         VStack{
                             Text("\(Int(weatherKitManager.temp))")
                                 .font(.system(size: 75,weight: .bold))
                             
-                            Text("\(Image(systemName: "arrowtriangle.up.fill"))\(Int(weatherKitManager.highestTemp))  \(Int(weatherKitManager.lowestTemp))\(Image(systemName: "arrowtriangle.down.fill"))")
+                            Text("\(Image(systemName: "arrowtriangle.up.fill"))\(Int(weatherKitManager.highestTemp))    \(Int(weatherKitManager.lowestTemp))\(Image(systemName: "arrowtriangle.down.fill"))")
                                 .font(.system(size: 20,weight: .semibold))
                             
                         }
-                        .position(x:geometryReader.size.width/6 * 5,y: -geometryReader.size.height/8)
+                        .position(x:geometryReader.size.width/6 * 5,y: -geometryReader.size.height/6)
                         ScrollView(.horizontal) {
                             HStack{
                                 ForEach(weatherKitManager.hourlyForecast,id: \.time){ condition in
