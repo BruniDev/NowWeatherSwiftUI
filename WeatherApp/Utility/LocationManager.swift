@@ -7,11 +7,13 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
+    let geocoder = CLGeocoder()
+    let locale = Locale(identifier: "Ko-kr")
     @Published var authorizationStatus : CLAuthorizationStatus?
-
     var latitude : Double {
         locationManager.location?.coordinate.latitude ?? 0.0
     }
@@ -25,6 +27,22 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
     }
     
+  
+    func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees,completion : @escaping(String) -> ()){
+            let geocoder = CLGeocoder()
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+    
+        geocoder.reverseGeocodeLocation(location) {placemarks, error in
+            if let placemark = placemarks?.first {
+
+                let address = placemark.address!
+               
+                completion(address)
+            }
+        }
+    }
+      
+        
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:
@@ -60,4 +78,28 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
+}
+
+
+extension CLPlacemark {
+
+    var address: String? {
+        
+            var result = ""
+
+            if let country = country {
+                result += "\(country)"
+            }
+
+            if let city = locality {
+                result += ", \(city)"
+            }
+    
+
+            return result
+        
+
+       
+    }
+
 }
