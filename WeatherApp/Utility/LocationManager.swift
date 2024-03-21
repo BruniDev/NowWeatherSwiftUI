@@ -11,7 +11,7 @@ import CoreLocation
 class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     @Published var authorizationStatus : CLAuthorizationStatus?
-    
+
     var latitude : Double {
         locationManager.location?.coordinate.latitude ?? 0.0
     }
@@ -23,7 +23,6 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     override init(){
         super.init()
         locationManager.delegate = self
-        locationManager.startUpdatingLocation()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -51,7 +50,7 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         locationManager.stopUpdatingLocation()
         
     }
@@ -59,4 +58,6 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error location")
     }
+    
+    
 }
