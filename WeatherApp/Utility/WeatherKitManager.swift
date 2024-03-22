@@ -33,43 +33,19 @@ import WeatherKit
         return convert ?? 0
     }
     
-    var realtemp : String {
-        let realTemp = weather?.currentWeather.apparentTemperature
-        
-        let convert = realTemp?.converted(to: .celsius).description
-        return convert ?? "Loading real Weather Data"
-    }
-    
-    var windSpeed : Double {
-        let windSpeed = weather?.currentWeather.wind.speed.value
-        
-        return windSpeed ?? 0.0
-        
-    }
-    
+     
     var weatherCondition : String {
         let weatherCondition = weather?.currentWeather.condition.description
         
         return weatherCondition ?? " "
     }
     
-    var uvCondition : Int {
-        let uvCondition = weather?.currentWeather.uvIndex.value
-        
-        return uvCondition ?? 0
-    }
-    
-    var visibility : Double {
-        let visibility = weather?.currentWeather.visibility.value
-        
-        return visibility ?? 0.0
-    }
-    
     var hourlyForecast : [HourWeather] {
         var forecast = [HourWeather]()
         weather?.hourlyForecast.forecast.forEach{
             if self.isSameHourOrLater(date1: $0.date, date2: Date()){
-                forecast.append(HourWeather(temperature: "\($0.temperature.formatted().dropLast())",symbolName: $0.symbolName,time: self.hourFormatter(date: $0.date)))
+                forecast.append(HourWeather(temperature: "\(Int($0.temperature.converted(to: .celsius).value.rounded()))",symbolName: $0.symbolName,time: self.hourFormatter(date: $0.date)))
+              
             }
         }
         return forecast
@@ -99,7 +75,8 @@ import WeatherKit
     
     func hourFormatter(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "ha"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "a h시"
         
         let calendar = Calendar.current
         
@@ -107,7 +84,7 @@ import WeatherKit
         let currentDataComponents = calendar.dateComponents([.day,.hour], from: Date())
         
         if inputDataComponent == currentDataComponents {
-            return "now"
+            return "지금"
         } else {
             return dateFormatter.string(from: date)
         }
