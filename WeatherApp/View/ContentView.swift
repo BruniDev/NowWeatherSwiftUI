@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-
+    @State var isLaunching: Bool = true
     var body: some View {
-        WeatherView()
+        if isLaunching{
+            LoadingView()
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        isLaunching = false
+                    }}
+        }else{
+            WeatherView()
+        }
     }
 }
 

@@ -12,7 +12,6 @@ import SwiftUI
 class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     let geocoder = CLGeocoder()
-    let locale = Locale(identifier: "Ko-kr")
     @Published var authorizationStatus : CLAuthorizationStatus?
     var latitude : Double {
         locationManager.location?.coordinate.latitude ?? 0.0
@@ -86,18 +85,27 @@ extension CLPlacemark {
     var address: String? {
         
             var result = ""
-
-            if let country = country {
-                result += "\(country)"
+        
+            if let city = administrativeArea {
+                if city == "서울특별시" {
+                    result += ""
+                }else{
+                    result += "\(city)"
+                }
             }
-
-            if let city = locality {
-                result += ", \(city)"
+        if let city = locality {
+            result += " \(city)"
+            
+            if city == "서울특별시"
+            {
+                if let dong = subLocality {
+                    result += " \(dong)"
+                }
             }
-    
+        }
+       
 
             return result
-        
 
        
     }

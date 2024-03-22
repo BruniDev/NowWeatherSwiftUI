@@ -49,14 +49,14 @@ struct WeatherView: View {
                             HStack{
                                 ForEach(weatherKitManager.hourlyForecast,id: \.time){ condition in
                                     VStack{
-                                        Text(condition.temperature)
+                                        Text(condition.time)
                                             .font(.system(size: 20,weight: .semibold))
-                                            .padding(1)
                                         WeatherUtils.getWeatherIcon(condition: condition.symbolName)
 //                                        Text(condition.symbolName)
                                             .padding(1)
-                                        Text(condition.time)
+                                        Text("\(condition.temperature)°")
                                             .font(.system(size: 20,weight: .semibold))
+                                            .padding(1)
                                     }
                                     
                                 }
@@ -80,26 +80,3 @@ struct WeatherView: View {
 //#Preview {
 //    WeatherView(viewModel: WeatherInfoViewModel())
 //}
-
-extension WeatherView{
-    
-      func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-              let geocoder = CLGeocoder()
-              let location = CLLocation(latitude: latitude, longitude: longitude)
-              geocoder.reverseGeocodeLocation(location) {(placemarks, error) in
-                  if error != nil {
-                      print("Failed to retrieve address")
-                      return
-                  }
-                  
-                  if let placemarks = placemarks, let placemark = placemarks.first {
-                      print(placemark.address!)
-                  }
-                  else
-                  {
-                      print("No Matching Address Found")
-                  }
-                  
-              }
-          }
-}
