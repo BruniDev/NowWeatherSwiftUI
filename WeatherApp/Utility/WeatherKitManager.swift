@@ -16,6 +16,7 @@ import WeatherKit
             weather = try await Task.detached(priority: .userInitiated) {
                 return try await WeatherService.shared.weather(for: .init(latitude: latitude, longitude: longtitude))
             }.value
+            UserDefaults.shared.set("ddd", forKey: "weather")
         } catch {
             fatalError("\(error)")
         }
@@ -96,4 +97,11 @@ struct HourWeather  : Hashable{
     let temperature : String
     let symbolName : String
     let time : String
+}
+
+extension UserDefaults {
+    static var shared: UserDefaults {
+        let appGroupId = "group.com.brunidev.weatherWhat"
+        return UserDefaults(suiteName: appGroupId)!
+    }
 }
