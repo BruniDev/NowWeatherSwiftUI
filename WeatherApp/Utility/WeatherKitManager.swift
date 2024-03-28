@@ -9,8 +9,8 @@ import Foundation
 import WeatherKit
 
 @MainActor class WeatherKitManager : ObservableObject {
+@Published var weather : Weather?
     
-    @Published var weather : Weather?
     func getWeather(latitude : Double, longtitude : Double) async {
         do {
             weather = try await Task.detached(priority: .userInitiated) {

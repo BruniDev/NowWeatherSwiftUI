@@ -12,7 +12,6 @@ import CoreLocation
 struct WeatherView: View {
     
     @ObservedObject var weatherKitManager = WeatherKitManager()
-    @State private var showingSheet = false
     @StateObject var locationManager = LocationManager()
     @State var locationTitle = ""
     var weatherUtils = WeatherUtils()
