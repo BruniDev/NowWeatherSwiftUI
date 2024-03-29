@@ -8,11 +8,12 @@
 import SwiftUI
 import WeatherKit
 import CoreLocation
-
+import WidgetKit
 struct WeatherView: View {
     
     @ObservedObject var weatherKitManager = WeatherKitManager()
     @StateObject var locationManager = LocationManager()
+
     @State var locationTitle = ""
     var weatherUtils = WeatherUtils()
     
@@ -27,8 +28,11 @@ struct WeatherView: View {
                         Text(" ")
                             .task {
                                 self.locationManager.reverseGeocoding(latitude: locationManager.latitude, longitude: locationManager.longtitude) {address in
-                                    print(address)
                                     self.locationTitle = address
+                                    let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
+                                       userDefaults.set(address, forKey: "nowLocation")
+                                       userDefaults.synchronize()
+                                       WidgetCenter.shared.reloadAllTimelines()
                                 }
                                     await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
                                 }

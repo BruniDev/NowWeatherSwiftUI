@@ -36,7 +36,6 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
 
                 let address = placemark.address!
-               
                 completion(address)
             }
         }

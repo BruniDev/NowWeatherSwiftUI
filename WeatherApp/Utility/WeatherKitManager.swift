@@ -8,10 +8,10 @@
 import Foundation
 import WeatherKit
 import SwiftUI
+import WidgetKit
 
 @MainActor class WeatherKitManager : ObservableObject {
 @Published var weather : Weather?
-@AppStorage("highestTemperature") var hightemp = 0.0
     
     func getWeather(latitude : Double, longtitude : Double) async {
         do {
@@ -32,13 +32,20 @@ import SwiftUI
         let temp =
         weather?.currentWeather.temperature
         let convert = temp?.converted(to: .celsius).value.rounded()
+        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
+           userDefaults.set(convert, forKey: "nowTemperature")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
         return convert ?? 0
     }
     
      
     var weatherCondition : String {
         let weatherCondition = weather?.currentWeather.condition.description
-        
+        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
+           userDefaults.set(weatherCondition, forKey: "weatherCondition")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
         return weatherCondition ?? " "
     }
     
@@ -56,7 +63,10 @@ import SwiftUI
     var highestTemp : Double {
         let temp = weather?.dailyForecast[0].highTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
-        UserDefaults.shared.set(convert, forKey: "highTemp")
+        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
+           userDefaults.set(convert, forKey: "highTemp")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
 
         return convert ?? 0
     }
@@ -64,6 +74,10 @@ import SwiftUI
     var lowestTemp : Double {
         let temp = weather?.dailyForecast[0].lowTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
+        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
+           userDefaults.set(convert, forKey: "lowTemp")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
         return convert ?? 0
     }
     

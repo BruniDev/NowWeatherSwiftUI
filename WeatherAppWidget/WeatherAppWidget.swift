@@ -39,12 +39,29 @@ struct Provider: TimelineProvider {
     
 }
 
+func getConditionImage(condition : String) -> Image {
+    if condition == "cloud" || condition == "cloud.moon" || condition == "Cloudy"{
+        return Image("cloud")
+    } else if condition == "cloud.rain" || condition == "rain" || condition == "cloud.moon.rain"{
+        return Image("rain")
+    } else if condition == "wind" {
+        return Image("storm")
+    } else if condition == "moon" {
+        return Image("sun")
+    }
+    else if condition == "snow" {
+        return Image("snow")
+    }
+    else {
+        return Image("sun")
+    }
+}
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let temp : Int
+    let temp : Double
     let condition : String
-    let hightemp : Int
-    let lowtemp : Int
+    let hightemp : Double
+    let lowtemp : Double
     let location : String
 }
 
@@ -54,17 +71,17 @@ struct WeatherAppWidgetEntryView : View {
     
     var body: some View {
         ZStack{
-            Image("snow")
+            getConditionImage(condition: UserDefaults.shared.string(forKey: "weatherCondition") ?? "snow")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
             VStack(alignment : .leading) {
-                Text("성남시 분당구")
+                Text("\(UserDefaults.shared.string(forKey: "nowLocation")!)")
                     .font(.system(size: 16,weight: .semibold))
                     .padding(.leading,5)
                     .padding(.top,20)
                 Spacer()
                 HStack(alignment : .center){
-                    Text("18°")
+                    Text("\(UserDefaults.shared.string(forKey: "nowTemperature")!)°")
                         .font(.system(size: 50,weight: .bold))
                         .padding(.leading,5)
                     HStack{
@@ -77,11 +94,11 @@ struct WeatherAppWidgetEntryView : View {
                         }
                         .padding(.trailing,0)
                         VStack {
-                            Text("20°")
+                            Text("\(UserDefaults.shared.string(forKey: "highTemp")!)°")
                                 .font(.system(size: 16,weight: .semibold))
                                 .padding(.top,2)
                                 .padding(.bottom,1)
-                            Text("4°")
+                            Text("\(UserDefaults.shared.string(forKey: "lowTemp")!)°")
                                 .font(.system(size: 16,weight: .semibold))
                         }
                     }
