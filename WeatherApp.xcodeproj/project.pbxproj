@@ -10,13 +10,13 @@
 		7B0E02152BB54BCB009BEEA6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0E02142BB54BCB009BEEA6 /* WidgetKit.framework */; };
 		7B0E02172BB54BCB009BEEA6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0E02162BB54BCB009BEEA6 /* SwiftUI.framework */; };
 		7B0E021A2BB54BCB009BEEA6 /* WeatherAppWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E02192BB54BCB009BEEA6 /* WeatherAppWidgetBundle.swift */; };
-		7B0E021C2BB54BCB009BEEA6 /* WeatherAppWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E021B2BB54BCB009BEEA6 /* WeatherAppWidget.swift */; };
 		7B0E021E2BB54BCD009BEEA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B0E021D2BB54BCD009BEEA6 /* Assets.xcassets */; };
 		7B0E02222BB54BCD009BEEA6 /* WeatherAppWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7B0E02122BB54BCB009BEEA6 /* WeatherAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7B3F3B6F2BA0A01300875CDF /* WeatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F3B6E2BA0A01300875CDF /* WeatherAppApp.swift */; };
 		7B3F3B712BA0A01300875CDF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F3B702BA0A01300875CDF /* ContentView.swift */; };
 		7B3F3B732BA0A01500875CDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F3B722BA0A01500875CDF /* Assets.xcassets */; };
 		7B3F3B762BA0A01500875CDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F3B752BA0A01500875CDF /* Preview Assets.xcassets */; };
+		7B542FBB2BB6D32C00156693 /* WeatherAppWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E021B2BB54BCB009BEEA6 /* WeatherAppWidget.swift */; };
 		7B8BA15E2BA0AA83004B6788 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8BA15D2BA0AA83004B6788 /* LocationManager.swift */; };
 		7B8BA1612BA0AC8C004B6788 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8BA1602BA0AC8C004B6788 /* LoadingView.swift */; };
 		7B8BA1632BA0ADDE004B6788 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8BA1622BA0ADDE004B6788 /* WeatherView.swift */; };
@@ -272,7 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B0E021C2BB54BCB009BEEA6 /* WeatherAppWidget.swift in Sources */,
+				7B542FBB2BB6D32C00156693 /* WeatherAppWidget.swift in Sources */,
 				7B0E021A2BB54BCB009BEEA6 /* WeatherAppWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +315,7 @@
 				INFOPLIST_FILE = WeatherAppWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WeatherAppWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -343,6 +344,7 @@
 				INFOPLIST_FILE = WeatherAppWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WeatherAppWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -410,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -467,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -494,6 +496,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -526,6 +529,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -35,6 +35,8 @@ struct Provider: TimelineProvider {
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
+    
+    
 }
 
 struct SimpleEntry: TimelineEntry {
@@ -55,16 +57,35 @@ struct WeatherAppWidgetEntryView : View {
             Image("snow")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-            VStack {
-                Text("여기 위치넣어야함 ")
+            VStack(alignment : .leading) {
+                Text("성남시 분당구")
+                    .font(.system(size: 16,weight: .semibold))
+                    .padding(.leading,5)
                     .padding(.top,20)
                 Spacer()
-                HStack{
-                    Text("현재온도")
-                    VStack{
-                        Text("최고온도")
-                        Text("최저온도")
+                HStack(alignment : .center){
+                    Text("18°")
+                        .font(.system(size: 50,weight: .bold))
+                        .padding(.leading,5)
+                    HStack{
+                        VStack {
+                            Text("\(Image(systemName:"arrowtriangle.up.fill"))")
+                                .font(.system(size: 16,weight: .semibold))
+                                .padding(.bottom,1)
+                            Text("\(Image(systemName:"arrowtriangle.down.fill"))")
+                                .font(.system(size: 16,weight: .semibold))
+                        }
+                        .padding(.trailing,0)
+                        VStack {
+                            Text("20°")
+                                .font(.system(size: 16,weight: .semibold))
+                                .padding(.top,2)
+                                .padding(.bottom,1)
+                            Text("4°")
+                                .font(.system(size: 16,weight: .semibold))
+                        }
                     }
+                    .padding(.trailing,5)
                 }
                 .padding(.bottom,10)
                 

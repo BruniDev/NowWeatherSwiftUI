@@ -7,9 +7,11 @@
 
 import Foundation
 import WeatherKit
+import SwiftUI
 
 @MainActor class WeatherKitManager : ObservableObject {
 @Published var weather : Weather?
+@AppStorage("highestTemperature") var hightemp = 0.0
     
     func getWeather(latitude : Double, longtitude : Double) async {
         do {
@@ -29,7 +31,6 @@ import WeatherKit
     var temp : Double {
         let temp =
         weather?.currentWeather.temperature
-        
         let convert = temp?.converted(to: .celsius).value.rounded()
         return convert ?? 0
     }
@@ -52,12 +53,11 @@ import WeatherKit
         return forecast
     }
     
-    
-    
-    
     var highestTemp : Double {
         let temp = weather?.dailyForecast[0].highTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
+        UserDefaults.shared.set(convert, forKey: "highTemp")
+
         return convert ?? 0
     }
     
