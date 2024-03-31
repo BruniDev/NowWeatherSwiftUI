@@ -13,6 +13,7 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     let geocoder = CLGeocoder()
     @Published var authorizationStatus : CLAuthorizationStatus?
+    
     var latitude : Double {
         locationManager.location?.coordinate.latitude ?? 0.0
     }
@@ -26,7 +27,7 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
     }
     
-  
+  // MARK: - 주소로 바꿔주는 함수
     func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees,completion : @escaping(String) -> ()){
             let geocoder = CLGeocoder()
             let location = CLLocation(latitude: latitude, longitude: longitude)
@@ -35,13 +36,12 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
 
                 let address = placemark.address!
-               
                 completion(address)
             }
         }
     }
       
-        
+        // MARK: - 위치정보관련
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:

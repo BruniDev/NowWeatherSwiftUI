@@ -7,15 +7,19 @@
 
 import Foundation
 import WeatherKit
+import SwiftUI
+import WidgetKit
 
 @MainActor class WeatherKitManager : ObservableObject {
+@Published var weather : Weather?
+    var userDefaults = UserDefaults.shared
     
-    @Published var weather : Weather?
     func getWeather(latitude : Double, longtitude : Double) async {
         do {
             weather = try await Task.detached(priority: .userInitiated) {
                 return try await WeatherService.shared.weather(for: .init(latitude: latitude, longitude: longtitude))
             }.value
+            UserDefaults.shared.set("ddd", forKey: "weather")
         } catch {
             fatalError("\(error)")
         }
@@ -28,15 +32,20 @@ import WeatherKit
     var temp : Double {
         let temp =
         weather?.currentWeather.temperature
-        
         let convert = temp?.converted(to: .celsius).value.rounded()
+           userDefaults.set(convert, forKey: "nowTemperature")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
         return convert ?? 0
     }
     
      
     var weatherCondition : String {
         let weatherCondition = weather?.currentWeather.condition.description
-        
+
+           userDefaults.set(weatherCondition, forKey: "weatherCondition")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
         return weatherCondition ?? " "
     }
     
@@ -51,18 +60,22 @@ import WeatherKit
         return forecast
     }
     
-    
-    
-    
     var highestTemp : Double {
         let temp = weather?.dailyForecast[0].highTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
+           userDefaults.set(convert, forKey: "highTemp")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
+
         return convert ?? 0
     }
     
     var lowestTemp : Double {
         let temp = weather?.dailyForecast[0].lowTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
+           userDefaults.set(convert, forKey: "lowTemp")
+           userDefaults.synchronize()
+           WidgetCenter.shared.reloadAllTimelines()
         return convert ?? 0
     }
     
@@ -96,4 +109,11 @@ struct HourWeather  : Hashable{
     let temperature : String
     let symbolName : String
     let time : String
+}
+
+extension UserDefaults {
+    static var shared: UserDefaults {
+        let appGroupId = "group.com.brunidev.weatherWhat"
+        return UserDefaults(suiteName: appGroupId)!
+    }
 }
