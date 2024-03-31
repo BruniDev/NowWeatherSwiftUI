@@ -13,7 +13,7 @@ struct WeatherView: View {
     
     @ObservedObject var weatherKitManager = WeatherKitManager()
     @StateObject var locationManager = LocationManager()
-
+    var userDefaults = UserDefaults.shared
     @State var locationTitle = ""
     var weatherUtils = WeatherUtils()
     
@@ -29,7 +29,7 @@ struct WeatherView: View {
                             .task {
                                 self.locationManager.reverseGeocoding(latitude: locationManager.latitude, longitude: locationManager.longtitude) {address in
                                     self.locationTitle = address
-                                    let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
+                              
                                        userDefaults.set(address, forKey: "nowLocation")
                                        userDefaults.synchronize()
                                        WidgetCenter.shared.reloadAllTimelines()

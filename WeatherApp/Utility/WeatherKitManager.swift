@@ -12,6 +12,7 @@ import WidgetKit
 
 @MainActor class WeatherKitManager : ObservableObject {
 @Published var weather : Weather?
+    var userDefaults = UserDefaults.shared
     
     func getWeather(latitude : Double, longtitude : Double) async {
         do {
@@ -32,7 +33,6 @@ import WidgetKit
         let temp =
         weather?.currentWeather.temperature
         let convert = temp?.converted(to: .celsius).value.rounded()
-        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
            userDefaults.set(convert, forKey: "nowTemperature")
            userDefaults.synchronize()
            WidgetCenter.shared.reloadAllTimelines()
@@ -42,7 +42,7 @@ import WidgetKit
      
     var weatherCondition : String {
         let weatherCondition = weather?.currentWeather.condition.description
-        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
+
            userDefaults.set(weatherCondition, forKey: "weatherCondition")
            userDefaults.synchronize()
            WidgetCenter.shared.reloadAllTimelines()
@@ -63,7 +63,6 @@ import WidgetKit
     var highestTemp : Double {
         let temp = weather?.dailyForecast[0].highTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
-        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
            userDefaults.set(convert, forKey: "highTemp")
            userDefaults.synchronize()
            WidgetCenter.shared.reloadAllTimelines()
@@ -74,7 +73,6 @@ import WidgetKit
     var lowestTemp : Double {
         let temp = weather?.dailyForecast[0].lowTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
-        let userDefaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")!
            userDefaults.set(convert, forKey: "lowTemp")
            userDefaults.synchronize()
            WidgetCenter.shared.reloadAllTimelines()
