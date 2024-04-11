@@ -51,10 +51,21 @@ import WidgetKit
     
     var hourlyForecast : [HourWeather] {
         var forecast = [HourWeather]()
+        guard let date1 = Calendar.current.date(byAdding: .hour, value: 12, to: Date()) else { return forecast }
         weather?.hourlyForecast.forecast.forEach{
-            if self.isSameHourOrLater(date1: $0.date, date2: Date()){
+            if self.afterHour(date1: $0.date, date2: Date()) && $0.date < date1 {
                 forecast.append(HourWeather(temperature: "\(Int($0.temperature.converted(to: .celsius).value.rounded()))",symbolName: $0.symbolName,time: self.hourFormatter(date: $0.date)))
               
+            }
+        }
+        return forecast
+    }
+    
+    var dailyForecast : [DailyWeather] {
+        var forecast = [DailyWeather]()
+        weather?.dailyForecast.forecast.forEach{
+            if self.afterToday(date1: $0.date, date2: Date()){
+                forecast.append(DailyWeather(highTemperature: "\(Int($0.highTemperature.converted(to: .celsius).value.rounded()))", lowTemperature: "\(Int($0.lowTemperature.converted(to: .celsius).value.rounded()))", time: self.dayFormatter(date: $0.date), symbolName:  $0.symbolName))
             }
         }
         return forecast
@@ -79,36 +90,49 @@ import WidgetKit
         return convert ?? 0
     }
     
-    func isSameHourOrLater(date1 : Date, date2 : Date) -> Bool {
+    func afterToday(date1: Date, date2: Date) -> Bool {
+        let calendar = Calendar.current
+        let comparisonResult = calendar.compare(date1,to:date2,toGranularity: .day)
+        
+        return comparisonResult == .orderedDescending
+    }
+    func afterHour(date1: Date, date2: Date) -> Bool {
         let calendar = Calendar.current
         let comparisonResult = calendar.compare(date1,to:date2,toGranularity: .hour)
         
-        return comparisonResult == .orderedSame || comparisonResult == .orderedDescending
+        return comparisonResult == .orderedDescending
     }
-    
     func hourFormatter(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "a h시"
-        
-        let calendar = Calendar.current
-        
-        let inputDataComponent = calendar.dateComponents([.day,.hour], from: date)
-        let currentDataComponents = calendar.dateComponents([.day,.hour], from: Date())
-        
-        if inputDataComponent == currentDataComponents {
-            return "지금"
-        } else {
-            return dateFormatter.string(from: date)
-        }
+    
+        return dateFormatter.string(from: date)
+     
     }
-
+    
+    func dayFormatter(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "EEEE"
+        
+        return dateFormatter.string(from: date)
+    }
+    
 }
 
 struct HourWeather  : Hashable{
     let temperature : String
     let symbolName : String
     let time : String
+}
+
+struct DailyWeather : Hashable {
+    let highTemperature : String
+    let lowTemperature : String
+    let time : String
+    let symbolName : String
+    
 }
 
 extension UserDefaults {

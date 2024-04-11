@@ -38,4 +38,6 @@ struct WeatherUtils {
              return Image("sunny_icon")
          }
        }
+    
+  
 }
