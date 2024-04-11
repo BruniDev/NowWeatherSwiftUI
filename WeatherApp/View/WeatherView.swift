@@ -24,48 +24,58 @@ struct WeatherView: View {
                     .resizable()
                     .ignoresSafeArea()
                 if locationManager.authorizationStatus == .authorizedWhenInUse {
-                    VStack(alignment: .leading){
-                        Text(" ")
-                            .task {
-                                self.locationManager.reverseGeocoding(latitude: locationManager.latitude, longitude: locationManager.longtitude) {address in
-                                    self.locationTitle = address
-                              
-                                       userDefaults.set(address, forKey: "nowLocation")
-                                       userDefaults.synchronize()
-                                       WidgetCenter.shared.reloadAllTimelines()
-                                }
+                    ScrollView{
+                        VStack(alignment: .leading){
+                            Text(" ")
+                                .task {
+                                    self.locationManager.reverseGeocoding(latitude: locationManager.latitude, longitude: locationManager.longtitude) {address in
+                                        self.locationTitle = address
+                                        
+                                        userDefaults.set(address, forKey: "nowLocation")
+                                        userDefaults.synchronize()
+                                        WidgetCenter.shared.reloadAllTimelines()
+                                    }
                                     await weatherKitManager.getWeather(latitude: locationManager.latitude, longtitude: locationManager.longtitude)
                                 }
-                        Text(locationTitle)
+                            Text(locationTitle)
                                 .position(x:geometryReader.size.width/3,y:geometryReader.size.height/10)
                                 .font(.system(size: 35,weight: .bold))
-                        VStack{
-                            Text("\(Int(weatherKitManager.temp))")
-                                .font(.system(size: 75,weight: .bold))
-                            
-                            Text("\(Image(systemName: "arrowtriangle.up.fill"))\(Int(weatherKitManager.highestTemp))    \(Int(weatherKitManager.lowestTemp))\(Image(systemName: "arrowtriangle.down.fill"))")
-                                .font(.system(size: 20,weight: .semibold))
-                            
-                        }
-                        .position(x:geometryReader.size.width/6 * 5,y: -geometryReader.size.height/6)
-                        ScrollView(.horizontal) {
-                            HStack{
-                                ForEach(weatherKitManager.hourlyForecast,id: \.time){ condition in
-                                    VStack{
-                                        Text(condition.time)
-                                            .font(.system(size: 20,weight: .semibold))
-                                        WeatherUtils.getWeatherIcon(condition: condition.symbolName)
-//                                        Text(condition.symbolName)
-                                            .padding(1)
-                                        Text("\(condition.temperature)°")
-                                            .font(.system(size: 20,weight: .semibold))
-                                            .padding(1)
+                            VStack{
+                                Text("\(Int(weatherKitManager.temp))")
+                                    .font(.system(size: 75,weight: .bold))
+                                
+                                Text("\(Image(systemName: "arrowtriangle.up.fill"))\(Int(weatherKitManager.highestTemp))    \(Int(weatherKitManager.lowestTemp))\(Image(systemName: "arrowtriangle.down.fill"))")
+                                    .font(.system(size: 20,weight: .semibold))
+                                
+                            }
+                            .position(x:geometryReader.size.width/6 * 5,y: geometryReader.size.height/6)
+                            ScrollView(.horizontal) {
+                                HStack{
+                                    ForEach(weatherKitManager.hourlyForecast,id: \.time){ condition in
+                                        VStack{
+                                            Text(condition.time)
+                                                .font(.system(size: 20,weight: .semibold))
+                                            WeatherUtils.getWeatherIcon(condition: condition.symbolName)
+                                            //                                        Text(condition.symbolName)
+                                                .padding(1)
+                                            Text("\(condition.temperature)°")
+                                                .font(.system(size: 20,weight: .semibold))
+                                                .padding(1)
+                                        }
+                                        
                                     }
-                                    
+                                }
+                            }
+                            .padding(.top,350)
+                            ForEach(weatherKitManager.dailyForecast,id: \.time){condition in
+                                HStack {
+                                    Text(condition.time)
+                                    WeatherUtils.getWeatherIcon(condition: condition.symbolName)
+                                    Text(condition.highTemperature)
+                                    Text(condition.lowTemperature)
                                 }
                             }
                         }
-                        
                     }
                 }
                 else {

@@ -60,6 +60,14 @@ import WidgetKit
         return forecast
     }
     
+    var dailyForecast : [DailyWeather] {
+        var forecast = [DailyWeather]()
+        weather?.dailyForecast.forecast.forEach{
+            forecast.append(DailyWeather(highTemperature: "\(Int($0.highTemperature.converted(to: .celsius).value.rounded()))", lowTemperature: "\(Int($0.lowTemperature.converted(to: .celsius).value.rounded()))", time: self.dayFormatter(date: $0.date), symbolName:  $0.symbolName))
+        }
+        return forecast
+    }
+    
     var highestTemp : Double {
         let temp = weather?.dailyForecast[0].highTemperature
         let convert = temp?.converted(to: .celsius).value.rounded()
@@ -102,13 +110,38 @@ import WidgetKit
             return dateFormatter.string(from: date)
         }
     }
-
+    
+    func dayFormatter(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "EEEE"
+        
+        let calendar = Calendar.current
+        
+        let inputDateComponents = calendar.dateComponents([.day], from: date)
+        let currentDateComponents = calendar.dateComponents([.day], from: Date())
+        
+        if inputDateComponents == currentDateComponents {
+            return "오늘"
+        } else {
+            return dateFormatter.string(from: date)
+        }
+    }
+    
 }
 
 struct HourWeather  : Hashable{
     let temperature : String
     let symbolName : String
     let time : String
+}
+
+struct DailyWeather : Hashable {
+    let highTemperature : String
+    let lowTemperature : String
+    let time : String
+    let symbolName : String
+    
 }
 
 extension UserDefaults {
