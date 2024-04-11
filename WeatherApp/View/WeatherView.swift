@@ -41,7 +41,7 @@ struct WeatherView: View {
                                 .position(x:geometryReader.size.width/3,y:geometryReader.size.height/10)
                                 .font(.system(size: 35,weight: .bold))
                             VStack{
-                                Text("\(Int(weatherKitManager.temp))")
+                                Text("\(Int(weatherKitManager.temp))°")
                                     .font(.system(size: 75,weight: .bold))
                                 
                                 Text("\(Image(systemName: "arrowtriangle.up.fill"))\(Int(weatherKitManager.highestTemp))    \(Int(weatherKitManager.lowestTemp))\(Image(systemName: "arrowtriangle.down.fill"))")
@@ -70,11 +70,27 @@ struct WeatherView: View {
                             ForEach(weatherKitManager.dailyForecast,id: \.time){condition in
                                 HStack {
                                     Text(condition.time)
+                                        .font(.system(size: 20,weight: .semibold))
+                                        .padding(.leading,30)
+                                      Spacer()
                                     WeatherUtils.getWeatherIcon(condition: condition.symbolName)
-                                    Text(condition.highTemperature)
-                                    Text(condition.lowTemperature)
+                                        .padding(.leading,30)
+                                    
+                                    Spacer()
+                                    Text("\(condition.highTemperature)°")
+                                        .font(.system(size: 24,weight: .semibold))
+                                    Text("|")
+                                        .font(.system(size: 24,weight: .semibold))
+                                        .opacity(0.2)
+                                    Text("\(condition.lowTemperature)°")
+                                        .font(.system(size: 24,weight: .semibold))
+                                        .opacity(0.5)
+                                    Spacer()
                                 }
+                                
                             }
+                           
+                            .padding(.top,30)
                         }
                     }
                 }
@@ -88,4 +104,8 @@ struct WeatherView: View {
             
         }
     }
+}
+
+#Preview {
+    WeatherView()
 }
