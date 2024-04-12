@@ -8,84 +8,79 @@
 import Foundation
 import CoreLocation
 import SwiftUI
+import Combine
 
 class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
-    var locationManager = CLLocationManager()
-    let geocoder = CLGeocoder()
+    @Published var city: String = ""
+    
+    private let locationManager = CLLocationManager()
+    private var isLocationManagerAuthorised: Bool = false
+    var userLocation : CLLocation?
+    
     @Published var authorizationStatus : CLAuthorizationStatus?
-    
-    var latitude : Double {
-        locationManager.location?.coordinate.latitude ?? 0.0
-    }
-    
-    var longtitude : Double {
-        locationManager.location?.coordinate.longitude ?? 0.0
-    }
     
     override init(){
         super.init()
         locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
-  // MARK: - 주소로 바꿔주는 함수
-    func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees,completion : @escaping(String) -> ()){
-            let geocoder = CLGeocoder()
-            let location = CLLocation(latitude: latitude, longitude: longitude)
-    
-        geocoder.reverseGeocodeLocation(location) {placemarks, error in
+    func getCityforCurrentLocation(completion: @escaping (_ city: String?, _ error: Error?) -> ()) {
+        guard let userLocation = userLocation else { return }
+        CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
             if let placemark = placemarks?.first {
-
                 let address = placemark.address!
-                completion(address)
+                completion(address,error)
             }
         }
     }
-      
-        // MARK: - 위치정보관련
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse:
-            authorizationStatus = .authorizedWhenInUse
-            locationManager.requestLocation()
-            break
-            
-        case .restricted :
-            authorizationStatus = .restricted
-            break
-            
-        case .denied :
-            authorizationStatus = .denied
-            break
-            
-        case .notDetermined :
-            authorizationStatus = .notDetermined
-            manager.requestWhenInUseAuthorization()
-            break
-            
-        default:
-            break
-        }
+
+    func requestUserLocation(){
+        guard isLocationManagerAuthorised else { return }
+        locationManager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        locationManager.stopUpdatingLocation()
+        userLocation = locations.first
+        locationManager.stopUpdatingLocation() // 배터리 줄여주는 용도
+        
+        getCityforCurrentLocation { [weak self] city, error in
+            guard error == nil else { return }
+            self?.city = city ?? "Unknown City"
+        }
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error location")
+        print("error location \(error.localizedDescription)")
     }
     
+        // MARK: - 위치정보관련
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways:
+            isLocationManagerAuthorised = true
+        case .authorizedWhenInUse:
+            isLocationManagerAuthorised = true
+        case .denied :
+            isLocationManagerAuthorised = false
+        case .notDetermined :
+            isLocationManagerAuthorised = false
+        case .restricted :
+            isLocationManagerAuthorised = false
+            
+        @unknown default:
+            fatalError("Location Manager error")
+        }
+    }
     
 }
 
 
 extension CLPlacemark {
-
     var address: String? {
-        
             var result = ""
-        
             if let city = administrativeArea {
                 if city == "서울특별시" {
                     result += ""
@@ -95,7 +90,6 @@ extension CLPlacemark {
             }
         if let city = locality {
             result += " \(city)"
-            
             if city == "서울특별시"
             {
                 if let dong = subLocality {
@@ -103,11 +97,6 @@ extension CLPlacemark {
                 }
             }
         }
-       
-
             return result
-
-       
     }
-
 }
