@@ -8,7 +8,7 @@
 import SwiftUI
 import WeatherKit
 
-struct CurrentWeatherView: View {
+struct CurrentWeatherInfoView: View {
     @State var weather : Weather
     @State var viewModel : ContentViewViewModel
     
