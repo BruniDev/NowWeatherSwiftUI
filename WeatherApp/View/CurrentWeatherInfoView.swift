@@ -16,10 +16,10 @@ struct CurrentWeatherInfoView: View {
         if let dailyForecast = weather.dailyForecast.first {
          
                 VStack(spacing: 5) {
-                    Text("\(Int(weather.currentWeather.temperature.value.rounded()))°")
+                    Text(weather.currentWeather.temperature.value.roundCelcius())
                     HStack(spacing: 10){
-                        Text("\(Int(dailyForecast.highTemperature.value.rounded()))°")
-                        Text("\(Int(dailyForecast.lowTemperature.value.rounded()))°")
+                        Text(dailyForecast.highTemperature.value.roundCelcius())
+                        Text(dailyForecast.lowTemperature.value.roundCelcius())
                     }
                 }
             }

@@ -18,9 +18,8 @@ struct CurrentWeatherHourlyView: View {
             HStack{
                 ForEach(viewModel.weatherManager.shortenedHourWeather ,id: \.date){ hourForecast in
                     VStack(spacing: 15) {
-                        Text("\(Int(hourForecast.temperature.value))")
+                        Text(hourForecast.temperature.value.roundCelcius())
                         WeatherUtils.getWeatherIcon(condition: hourForecast.condition.description)
-//                        Text("\(hourForecast.condition.description)")
                         Text(hourFormatter(date: hourForecast.date))
                     }
                 }

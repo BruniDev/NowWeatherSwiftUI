@@ -18,9 +18,8 @@ struct WeeklyWeatherView: View {
                 HStack {
                     Text(dayFormatter(date: dailyForecast.date))
                     WeatherUtils.getWeatherIcon(condition: dailyForecast.condition.description)
-//                    Text(dailyForecast.condition.description)
-                    Text(dailyForecast.highTemperature.description)
-                    Text(dailyForecast.lowTemperature.description)
+                    Text(dailyForecast.highTemperature.value.roundCelcius())
+                    Text(dailyForecast.lowTemperature.value.roundCelcius())
                 }
             }
         }
