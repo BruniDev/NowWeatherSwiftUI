@@ -24,6 +24,7 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        requestUserLocation()
     }
     
     func getCityforCurrentLocation(completion: @escaping (_ city: String?, _ error: Error?) -> ()) {

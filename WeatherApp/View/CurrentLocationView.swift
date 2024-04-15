@@ -12,9 +12,9 @@ struct CurrentLocationView: View {
     @State var weather : Weather
     @State var viewModel : ContentViewViewModel
     var body: some View {
-        VStack(spacing : 5) {
-            Text(viewModel.weatherManager.locationManager.city)
-                .font(.title)
+                VStack(spacing : 5) {
+                Text(viewModel.weatherManager.locationManager.city)
+                    .font(.custom("Pretendard-Bold", size: 35))
         }
     }
 }

@@ -17,15 +17,20 @@ struct CurrentWeatherHourlyView: View {
         ScrollView(.horizontal) {
             HStack{
                 ForEach(viewModel.weatherManager.shortenedHourWeather ,id: \.date){ hourForecast in
-                    VStack(spacing: 15) {
-                        Text(hourForecast.temperature.value.roundCelcius())
-                        WeatherUtils.getWeatherIcon(condition: hourForecast.condition.description)
+                    VStack{
                         Text(hourFormatter(date: hourForecast.date))
+                            .font(.custom("Pretendard-SemiBold", size: 15))
+                            .padding(.bottom,10)
+                        WeatherUtils.getWeatherIcon(condition: hourForecast.condition.description)
+                        Text(hourForecast.temperature.value.roundCelcius())
+                            .font(.custom("Pretendard-Medium", size: 20))
                     }
+                    .padding(.leading,10)
                 }
             }
         }
-        .padding(.top,350)
+        .scrollIndicators(.hidden)
+       
     }
 }
 

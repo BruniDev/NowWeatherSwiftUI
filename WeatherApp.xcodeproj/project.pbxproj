@@ -27,6 +27,10 @@
 		7BF4D96E2BC9775700CAA933 /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D96D2BC9775700CAA933 /* CurrentLocationView.swift */; };
 		7BF4D9732BC97B3A00CAA933 /* DayFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D9722BC97B3A00CAA933 /* DayFormatter.swift */; };
 		7BF4D9792BC9839A00CAA933 /* CelciusFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D9782BC9839A00CAA933 /* CelciusFormatter.swift */; };
+		7BF4D9842BC98DCE00CAA933 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4D97B2BC98DCE00CAA933 /* Pretendard-Medium.ttf */; };
+		7BF4D9862BC98DCE00CAA933 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4D97D2BC98DCE00CAA933 /* Pretendard-Regular.ttf */; };
+		7BF4D9892BC98DCE00CAA933 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4D9802BC98DCE00CAA933 /* Pretendard-SemiBold.ttf */; };
+		7BF4D98B2BC98DCE00CAA933 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF4D9822BC98DCE00CAA933 /* Pretendard-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,11 @@
 		7BF4D96D2BC9775700CAA933 /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
 		7BF4D9722BC97B3A00CAA933 /* DayFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFormatter.swift; sourceTree = "<group>"; };
 		7BF4D9782BC9839A00CAA933 /* CelciusFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelciusFormatter.swift; sourceTree = "<group>"; };
+		7BF4D97B2BC98DCE00CAA933 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
+		7BF4D97D2BC98DCE00CAA933 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		7BF4D9802BC98DCE00CAA933 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
+		7BF4D9822BC98DCE00CAA933 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		7BF4D98D2BC98DEF00CAA933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +152,8 @@
 		7B3F3B6D2BA0A01300875CDF /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				7BF4D98D2BC98DEF00CAA933 /* Info.plist */,
+				7BF4D97A2BC98D6400CAA933 /* Font */,
 				7BF4D9772BC9833100CAA933 /* ViewModel */,
 				7BF4D9742BC97C4D00CAA933 /* Utils */,
 				7B8BA1792BA4270A004B6788 /* WeatherApp.entitlements */,
@@ -200,6 +211,17 @@
 				7BF4D9652BC96A3300CAA933 /* ContentViewViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7BF4D97A2BC98D6400CAA933 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				7BF4D9822BC98DCE00CAA933 /* Pretendard-Bold.ttf */,
+				7BF4D97B2BC98DCE00CAA933 /* Pretendard-Medium.ttf */,
+				7BF4D97D2BC98DCE00CAA933 /* Pretendard-Regular.ttf */,
+				7BF4D9802BC98DCE00CAA933 /* Pretendard-SemiBold.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,8 +313,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BF4D9892BC98DCE00CAA933 /* Pretendard-SemiBold.ttf in Resources */,
 				7B3F3B762BA0A01500875CDF /* Preview Assets.xcassets in Resources */,
+				7BF4D98B2BC98DCE00CAA933 /* Pretendard-Bold.ttf in Resources */,
+				7BF4D9862BC98DCE00CAA933 /* Pretendard-Regular.ttf in Resources */,
 				7B3F3B732BA0A01500875CDF /* Assets.xcassets in Resources */,
+				7BF4D9842BC98DCE00CAA933 /* Pretendard-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +554,7 @@
 				DEVELOPMENT_TEAM = JRDC32KNLZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -561,6 +588,7 @@
 				DEVELOPMENT_TEAM = JRDC32KNLZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -15,11 +15,18 @@ struct CurrentWeatherInfoView: View {
     var body: some View {
         if let dailyForecast = weather.dailyForecast.first {
          
-                VStack(spacing: 5) {
+            VStack(alignment:.leading, spacing: 5) {
                     Text(weather.currentWeather.temperature.value.roundCelcius())
-                    HStack(spacing: 10){
+                        .font(.custom("Pretendard-Bold", size: 70))
+                    HStack(spacing: 3){
+                        Image(systemName: "arrowtriangle.up.fill")
                         Text(dailyForecast.highTemperature.value.roundCelcius())
+                            .font(.custom("Pretendard-SemiBold", size: 20))
+                            .padding(.trailing,2)
+                        Image(systemName: "arrowtriangle.down.fill")
                         Text(dailyForecast.lowTemperature.value.roundCelcius())
+                            .font(.custom("Pretendard-SemiBold", size: 20))
+                       
                     }
                 }
             }
