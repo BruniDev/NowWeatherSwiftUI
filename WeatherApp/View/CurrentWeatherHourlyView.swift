@@ -22,7 +22,6 @@ struct CurrentWeatherHourlyView: View {
                             .font(.custom("Pretendard-SemiBold", size: 15))
                             .padding(.bottom,10)
                         WeatherUtils.getWeatherIcon(condition: hourForecast.condition.description)
-                            .border(.black)
                         Text(hourForecast.temperature.value.roundCelcius())
                             .font(.custom("Pretendard-Medium", size: 20))
                     }
@@ -30,6 +29,7 @@ struct CurrentWeatherHourlyView: View {
                 }
             }
         }
+        .scrollIndicators(.hidden)
        
     }
 }

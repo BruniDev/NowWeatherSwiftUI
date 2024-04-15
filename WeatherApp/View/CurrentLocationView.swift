@@ -14,7 +14,7 @@ struct CurrentLocationView: View {
     var body: some View {
                 VStack(spacing : 5) {
                 Text(viewModel.weatherManager.locationManager.city)
-                    .font(.custom("Pretendard-Bold", size: 30))
+                    .font(.custom("Pretendard-Bold", size: 35))
         }
     }
 }

@@ -18,10 +18,10 @@ struct ContentView: View {
             if let weather = viewModel.weatherManager.weather {
                 ScrollView {
                     VStack {
-                        Spacer(minLength: 80)
+                        Spacer(minLength: 100)
                         HStack{
                             CurrentLocationView(weather: weather, viewModel: viewModel)
-                                .padding(.leading,20)
+                                .padding(.leading,40)
                             Spacer()
                         }
                         Spacer(minLength: 50)
@@ -43,6 +43,7 @@ struct ContentView: View {
                         .resizable()
                         .ignoresSafeArea()
                 }
+                .scrollIndicators(.hidden)
             } else {
                 VStack {
                     Spacer()

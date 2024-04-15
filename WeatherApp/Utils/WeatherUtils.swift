@@ -22,22 +22,44 @@ struct WeatherUtils {
     }
     
     static func getWeatherIcon(condition: String) -> Image {
-        if condition == "cloud" || condition == "cloud.moon" || condition == "Cloudy"{
-           return Image("cloud_icon")
-         } else if condition == "cloud.rain" || condition == "rain" || condition == "cloud.moon.rain"{
-           return Image("rain_icon")
-         } else if condition == "wind" {
-           return Image("wind_icon")
-         } else if condition == "moon" {
-             return Image("moon_icon")
-         }
-        else if condition == "snow" {
+        switch condition {
+        case "Clear":
+            return Image("sunny_icon")
+        case "Mostly Clear":
+            return Image("sunny_icon")
+        case "Partly Cloudy" :
+            return Image("cloud_sun")
+        case "Mostly Cloudy" :
+            return Image("cloud_icon")
+        case "Cloudy" :
+            return Image("cloud_icon")
+        case "Foggy":
+            return Image("cloud_icon")
+        case "Rain" :
+            return Image("rain_icon")
+        case "Heavy Rain" :
+            return Image("rain_icon")
+        case "Drizzle" :
+            return Image("rain_icon")
+        case "Blizzard" :
+            return Image("wind_icon")
+        case "Windy" :
+            return Image("wind_icon")
+        case "Breezy" :
+            return Image("wind_icon")
+        case "blowing Snow":
             return Image("snow_icon")
+        case "Heavy Snow" :
+            return Image("rain_icon")
+        case "Flurries" :
+            return Image("snow_icon")
+        default:
+            return Image("cloud_icon")
         }
-        else {
-             return Image("sunny_icon")
-         }
-       }
+        
+        
+    }
+    
     
   
 }
