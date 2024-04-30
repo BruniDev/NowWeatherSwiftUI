@@ -11,7 +11,7 @@ import CoreLocation
 import SwiftUI
 import Combine
 import WidgetKit
- 
+
 public class WeatherManager : ObservableObject {
     @Published var weather: Weather?
     @Published var locationManager = LocationManager()
@@ -21,7 +21,6 @@ public class WeatherManager : ObservableObject {
     init() {
         anyCancellable = locationManager.objectWillChange.sink{[weak self] (_) in
             self?.objectWillChange.send()
-            
         }
     }
     var shortenedHourWeather: [HourWeather] {
@@ -36,14 +35,32 @@ public class WeatherManager : ObservableObject {
     
     
     func requestWeatherForCurrentLocation() async {
-        guard let userLocation = locationManager.userLocation else { return }
+        guard let userLocation = locationManager.userLocation else {
+            return }
         do {
             weather = try await WeatherService.shared.weather(for: userLocation)
+            let weatherDefault = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")
+            weatherDefault?.set(weather?.dailyForecast.first?.highTemperature.value.roundCelcius(), forKey: "highTemp")
+            weatherDefault?.set(weather?.dailyForecast.first?.lowTemperature.value.roundCelcius() , forKey: "lowTemp")
+            weatherDefault?.set(weather?.currentWeather.temperature.value.roundCelcius() , forKey: "temp")
+            weatherDefault?.set(weather?.currentWeather.condition.description, forKey: "condition")
+            
         } catch {
             print("\(error.localizedDescription)")
             weather = nil
         }
     }
+    
+//    func requestWeatherForCurrentLocationinWidget() async -> Weather?{
+//        print("Enter")
+//        guard let userLocation = locationManager.userLocation else {return nil}
+//        do {
+//            return try await WeatherService.shared.weather(for: userLocation)
+//        } catch {
+//            print("Error: \(error.localizedDescription)")
+//        }
+//        return nil
+//    }
     
     
 }
