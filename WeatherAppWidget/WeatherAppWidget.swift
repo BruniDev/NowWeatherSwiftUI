@@ -12,12 +12,11 @@ import WeatherKit
 struct Provider: TimelineProvider {
     // MARK: - 위젯 최초로 렌더링
     func placeholder(in context: Context) -> SimpleEntry {
-      SimpleEntry(date: Date(), highTemp: "3",lowTemp: "3",temp: "3",condition: "cloud", city: "분당구")
+      SimpleEntry(date: Date(), highTemp: "0",lowTemp: "0",temp: "0",condition: "cloud", city: "분당구")
     }
     
     // MARK: - 미리보기 타이틀
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let weatherManager = WeatherManager()
         Task {
             if let defaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat") {
                 let highTemp = defaults.string(forKey: "highTemp")
@@ -28,7 +27,7 @@ struct Provider: TimelineProvider {
                 let entry = SimpleEntry(date: Date(), highTemp: highTemp ?? "",lowTemp: lowTemp ?? "",temp: temp ?? "",condition: condition ?? "",city: city ?? "")
                 completion(entry)
             }else {
-                let entry = SimpleEntry(date: Date(), highTemp: "3",lowTemp: "3",temp: "3",condition: "cloud", city: "분당구")
+                let entry = SimpleEntry(date: Date(), highTemp: "0",lowTemp: "0",temp: "0",condition: "cloud", city: "분당구")
                 completion(entry)
             }
         }
@@ -36,7 +35,6 @@ struct Provider: TimelineProvider {
     
     // MARK: - 위젯상태 변경
     func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
-        let weatherManager = WeatherManager()
         let update = Calendar.current.date(byAdding: .minute, value: 1,to: Date())!
         Task {
             if let defaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat") {
@@ -49,7 +47,7 @@ struct Provider: TimelineProvider {
                 let timeline = Timeline(entries: [entry], policy: .after(update))
                 completion(timeline)
             } else {
-                let entry = SimpleEntry(date: Date(), highTemp: "3",lowTemp: "3",temp: "3",condition: "cloud", city: "분당구")
+                let entry = SimpleEntry(date: Date(), highTemp: "0",lowTemp: "0",temp: "0",condition: "cloud", city: "분당구")
                 let timeline = Timeline(entries: [entry], policy: .after(update))
                 completion(timeline)
             }
@@ -101,7 +99,7 @@ struct WeatherAppWidget: Widget {
 #Preview(as: .systemSmall) {
     WeatherAppWidget()
 } timeline: {
-    SimpleEntry(date: Date(), highTemp: "3",lowTemp: "3",temp: "3",condition: "cloud", city: "분당구")
+    SimpleEntry(date: Date(), highTemp: "0",lowTemp: "0",temp: "0",condition: "cloud", city: "분당구")
 }
 
 
