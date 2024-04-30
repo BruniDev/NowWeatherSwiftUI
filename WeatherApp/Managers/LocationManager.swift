@@ -10,16 +10,16 @@ import CoreLocation
 import SwiftUI
 import Combine
 
-class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
+class LocationManager : NSObject, CLLocationManagerDelegate,ObservableObject {
     @Published var city: String = ""
     
     private let locationManager = CLLocationManager()
     private var isLocationManagerAuthorised: Bool = false
     var userLocation : CLLocation?
     
-    @Published var authorizationStatus : CLAuthorizationStatus?
     
     override init(){
+        print("Here")
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -28,12 +28,12 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func getCityforCurrentLocation(completion: @escaping (_ city: String?, _ error: Error?) -> ()) {
-        guard let userLocation = userLocation else { return }
+        guard let userLocation = userLocation else {
+            return }
         CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
-            if let placemark = placemarks?.first {
-                let address = placemark.address!
-                completion(address,error)
-            }
+            let weatherDefault = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")
+            weatherDefault?.set(placemarks?.first?.address!, forKey: "location")
+            completion(placemarks?.first?.address!,error)
         }
     }
 
@@ -45,10 +45,11 @@ class LocationManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         userLocation = locations.first
         locationManager.stopUpdatingLocation() // 배터리 줄여주는 용도
-        
         getCityforCurrentLocation { [weak self] city, error in
             guard error == nil else { return }
             self?.city = city ?? "Unknown City"
+            let locationDefault = UserDefaults(suiteName: "group.com.brunidev.weatherWhat")
+            locationDefault?.set(city, forKey: "city")
         }
         
     }

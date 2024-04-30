@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 import WeatherKit
 
-
 struct ContentView: View {
    @StateObject private var viewModel = ContentViewViewModel()
     let weatherUtils = WeatherUtils()
