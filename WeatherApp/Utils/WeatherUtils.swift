@@ -60,6 +60,24 @@ struct WeatherUtils {
         
     }
     
-    
+    func weatherAlert(checkNowOrNot : Int,condition : String) -> String {
+        let date = checkNowOrNot == 1 ? "오늘" : "내일"
+        switch condition {
+        case "Clear","Mostly Clear":
+           return "\(date)은 화창할 예정입니다 ☀️"
+        case "Partly Cloudy","Mostly Cloudy","Cloudy" :
+            return "\(date)은 구름이 많이 낄 예정입니다 ☁️"
+        case "Foggy":
+            return "\(date)은 안개가 많이 낄 예정입니다 😶‍🌫️"
+        case "Rain" ,"Heavy Rain","Drizzle" :
+            return "\(date)은 비소식이 있습니다 ☔️"
+        case "Blizzard","Windy","Breezy" :
+            return "\(date)은 바람이 많이 불어요 💨"
+        case "blowing Snow","Heavy Snow","Flurries" :
+            return "\(date)은 눈소식이 있습니다 ☃️"
+        default:
+            return "\(date)은 화창할 예정입니다 ☀️"
+        }
+    }
   
 }
