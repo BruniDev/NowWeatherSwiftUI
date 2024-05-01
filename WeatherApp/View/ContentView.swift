@@ -13,6 +13,7 @@ struct ContentView: View {
    @StateObject private var viewModel = ContentViewViewModel()
     let weatherUtils = WeatherUtils()
     var body : some View {
+        
         VStack{
             if let weather = viewModel.weatherManager.weather {
                 ScrollView {
@@ -43,6 +44,9 @@ struct ContentView: View {
                         .ignoresSafeArea()
                 }
                 .scrollIndicators(.hidden)
+                .task {
+                    setNotification()
+                }
             } else {
                 VStack {
                     Spacer()
@@ -58,6 +62,12 @@ struct ContentView: View {
         .task {
             await viewModel.weatherManager.requestWeatherForCurrentLocation()
         }
+    }
+    func setNotification() {
+        let manager = NotificationManager()
+        manager.requestPermission()
+        manager.addNotification(title: "안녕", body: "정혀나")
+        manager.scheduleNotifications()
     }
 }
 
