@@ -34,15 +34,20 @@ class NotificationManager {
     }
     
     // MARK: - 알림메시지 설정
-    func scheduleNotifications() {
+    func scheduleNotifications(_ num : Int) {
         for notification in notifications {
             let content = UNMutableNotificationContent()
             content.title = notification.title
             content.body = notification.body
-            
             var date = DateComponents()
-            date.hour = 19
-            date.minute = 55
+            
+            if num == 1 {
+                date.hour = 07
+                date.minute = 00
+            }else {
+                date.hour = 23
+                date.minute = 00
+            }
             let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
             let request = UNNotificationRequest(identifier: notification.id, content: content,trigger: trigger)
             

@@ -59,7 +59,9 @@ struct WeatherUtils {
         
         
     }
-    
+    func weatherLocation(location : String) -> String {
+        return "📍\(location)"
+    }
     func weatherAlert(checkNowOrNot : Int,condition : String) -> String {
         let date = checkNowOrNot == 1 ? "오늘" : "내일"
         switch condition {
@@ -78,6 +80,10 @@ struct WeatherUtils {
         default:
             return "\(date)은 화창할 예정입니다 ☀️"
         }
+    }
+    
+    func weatherHighLow(highTemp : String, lowTemp : String) -> String {
+        return "최고 \(highTemp) 최저 \(lowTemp)"
     }
   
 }
