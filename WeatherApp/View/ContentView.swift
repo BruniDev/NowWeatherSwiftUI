@@ -13,6 +13,7 @@ struct ContentView: View {
    @StateObject private var viewModel = ContentViewViewModel()
     let weatherUtils = WeatherUtils()
     var body : some View {
+        
         VStack{
             if let weather = viewModel.weatherManager.weather {
                 ScrollView {
@@ -57,6 +58,23 @@ struct ContentView: View {
         }
         .task {
             await viewModel.weatherManager.requestWeatherForCurrentLocation()
+            morningSetNotification()
+        }
+    }
+    func morningSetNotification() {
+        if let defaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat") {
+            let manager = NotificationManager()
+            manager.requestPermission()
+            manager.addNotification(title: weatherUtils.weatherLocation(location: defaults.string(forKey: "city") ?? ""), body: "\(weatherUtils.weatherAlert(checkNowOrNot : 1,condition: defaults.string(forKey: "condition") ?? ""))\n\(weatherUtils.weatherHighLow(highTemp: defaults.string(forKey: "highTemp") ?? "", lowTemp: defaults.string(forKey: "lowTemp") ?? ""))")
+            manager.scheduleNotifications(1)
+        }
+    }
+    func nightSetNotification() {
+        if let defaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat") {
+            let manager = NotificationManager()
+            manager.requestPermission()
+            manager.addNotification(title: weatherUtils.weatherLocation(location: defaults.string(forKey: "city") ?? ""), body: "\(weatherUtils.weatherAlert(checkNowOrNot : 0,condition: defaults.string(forKey: "tomorrowCondition") ?? ""))\n\(weatherUtils.weatherHighLow(highTemp: defaults.string(forKey: "tomorrowHighTemp") ?? "", lowTemp: defaults.string(forKey: "tomorrowLowTemp") ?? ""))")
+            manager.scheduleNotifications(0)
         }
     }
 }

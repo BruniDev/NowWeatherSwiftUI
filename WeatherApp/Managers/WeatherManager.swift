@@ -33,7 +33,6 @@ public class WeatherManager : ObservableObject {
         }
     }
     
-    
     func requestWeatherForCurrentLocation() async {
         guard let userLocation = locationManager.userLocation else {
             return }
@@ -44,6 +43,10 @@ public class WeatherManager : ObservableObject {
             weatherDefault?.set(weather?.dailyForecast.first?.lowTemperature.value.roundCelcius() , forKey: "lowTemp")
             weatherDefault?.set(weather?.currentWeather.temperature.value.roundCelcius() , forKey: "temp")
             weatherDefault?.set(weather?.currentWeather.condition.description, forKey: "condition")
+            weatherDefault?.set(weather?.dailyForecast[1].highTemperature,forKey: "tomorrowHighTemp")
+            weatherDefault?.set(weather?.dailyForecast[1].lowTemperature,forKey: "tomorrowLowTemp")
+            weatherDefault?.set(weather?.dailyForecast[1].condition,forKey: "tomorrowCondition")
+        
             
         } catch {
             print("\(error.localizedDescription)")
