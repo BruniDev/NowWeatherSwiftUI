@@ -10,7 +10,7 @@ import Combine
 import WeatherKit
 
 struct ContentView: View {
-   @StateObject private var viewModel = ContentViewViewModel()
+    @EnvironmentObject var viewModel : ContentViewViewModel
     let weatherUtils = WeatherUtils()
     var body : some View {
         VStack{
@@ -43,21 +43,9 @@ struct ContentView: View {
                         .ignoresSafeArea()
                 }
                 .scrollIndicators(.hidden)
-            
-            } else {
-                VStack {
-                    Spacer()
-                    Text("새로고침중....")
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .frame(width : 40)
-                    Spacer()
-                }
-                .edgesIgnoringSafeArea(.all)
             }
         }
         .task {
-            await viewModel.weatherManager.requestWeatherForCurrentLocation()
             morningSetNotification()
             nightSetNotification()
         }
