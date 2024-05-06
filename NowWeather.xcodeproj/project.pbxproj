@@ -15,11 +15,14 @@
 		7B2FFC082BDFDA0C0065AD18 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D9632BC9688D00CAA933 /* WeatherManager.swift */; };
 		7B2FFC092BE1140A0065AD18 /* CelciusFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D9782BC9839A00CAA933 /* CelciusFormatter.swift */; };
 		7B2FFC0B2BE21A270065AD18 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2FFC0A2BE21A270065AD18 /* NotificationManager.swift */; };
+		7B2FFC102BE89A650065AD18 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7B2FFC0F2BE89A650065AD18 /* Lottie */; };
+		7B2FFC122BE89ADA0065AD18 /* lottieAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B2FFC112BE89ADA0065AD18 /* lottieAnimation.json */; };
+		7B2FFC162BE89DB60065AD18 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2FFC152BE89DB60065AD18 /* AnimationView.swift */; };
 		7B3F3B6F2BA0A01300875CDF /* NowWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F3B6E2BA0A01300875CDF /* NowWeatherApp.swift */; };
 		7B3F3B712BA0A01300875CDF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F3B702BA0A01300875CDF /* ContentView.swift */; };
 		7B3F3B732BA0A01500875CDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F3B722BA0A01500875CDF /* Assets.xcassets */; };
 		7B3F3B762BA0A01500875CDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B3F3B752BA0A01500875CDF /* Preview Assets.xcassets */; };
-		7B542FBB2BB6D32C00156693 /* NowWeatherAppWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E021B2BB54BCB009BEEA6 /* NowWeatherAppWidget.swift */; };
+		7B542FBB2BB6D32C00156693 /* NowWeatherWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0E021B2BB54BCB009BEEA6 /* NowWeatherWidget.swift */; };
 		7B8BA15E2BA0AA83004B6788 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8BA15D2BA0AA83004B6788 /* LocationManager.swift */; };
 		7B8BA1742BA0B239004B6788 /* WeatherUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8BA1732BA0B239004B6788 /* WeatherUtils.swift */; };
 		7B8F7C2F2BCD240500332FA4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8BA15D2BA0AA83004B6788 /* LocationManager.swift */; };
@@ -65,12 +68,14 @@
 		7B0E02122BB54BCB009BEEA6 /* NowWeatherWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NowWeatherWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0E02142BB54BCB009BEEA6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		7B0E02162BB54BCB009BEEA6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		7B0E021B2BB54BCB009BEEA6 /* NowWeatherAppWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowWeatherAppWidget.swift; sourceTree = "<group>"; };
+		7B0E021B2BB54BCB009BEEA6 /* NowWeatherWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowWeatherWidget.swift; sourceTree = "<group>"; };
 		7B0E021D2BB54BCD009BEEA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B0E021F2BB54BCD009BEEA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B0E02272BB54C4D009BEEA6 /* WeatherAppWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherAppWidgetExtension.entitlements; sourceTree = "<group>"; };
+		7B0E02272BB54C4D009BEEA6 /* NowWeatherWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NowWeatherWidgetExtension.entitlements; sourceTree = "<group>"; };
 		7B2FFBFF2BDFC04D0065AD18 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
 		7B2FFC0A2BE21A270065AD18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		7B2FFC112BE89ADA0065AD18 /* lottieAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieAnimation.json; sourceTree = "<group>"; };
+		7B2FFC152BE89DB60065AD18 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		7B3F3B6B2BA0A01300875CDF /* NowWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NowWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3F3B6E2BA0A01300875CDF /* NowWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowWeatherApp.swift; sourceTree = "<group>"; };
 		7B3F3B702BA0A01300875CDF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,7 +83,7 @@
 		7B3F3B752BA0A01500875CDF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7B8BA15D2BA0AA83004B6788 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7B8BA1732BA0B239004B6788 /* WeatherUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUtils.swift; sourceTree = "<group>"; };
-		7B8BA1792BA4270A004B6788 /* WeatherApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherApp.entitlements; sourceTree = "<group>"; };
+		7B8BA1792BA4270A004B6788 /* NowWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NowWeather.entitlements; sourceTree = "<group>"; };
 		7BF4D9632BC9688D00CAA933 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		7BF4D9652BC96A3300CAA933 /* ContentViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewViewModel.swift; sourceTree = "<group>"; };
 		7BF4D9672BC96BC100CAA933 /* CurrentWeatherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherInfoView.swift; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B2FFC102BE89A650065AD18 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,23 +129,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7B0E02182BB54BCB009BEEA6 /* NowWeatherAppWidget */ = {
+		7B0E02182BB54BCB009BEEA6 /* NowWeatherWidget */ = {
 			isa = PBXGroup;
 			children = (
-				7B0E021B2BB54BCB009BEEA6 /* NowWeatherAppWidget.swift */,
+				7B0E021B2BB54BCB009BEEA6 /* NowWeatherWidget.swift */,
 				7B2FFBFF2BDFC04D0065AD18 /* SmallWidgetView.swift */,
 				7B0E021D2BB54BCD009BEEA6 /* Assets.xcassets */,
 				7B0E021F2BB54BCD009BEEA6 /* Info.plist */,
 			);
-			path = NowWeatherAppWidget;
+			path = NowWeatherWidget;
 			sourceTree = "<group>";
 		};
 		7B3F3B622BA0A01300875CDF = {
 			isa = PBXGroup;
 			children = (
-				7B0E02272BB54C4D009BEEA6 /* WeatherAppWidgetExtension.entitlements */,
+				7B0E02272BB54C4D009BEEA6 /* NowWeatherWidgetExtension.entitlements */,
 				7B3F3B6D2BA0A01300875CDF /* NowWeather */,
-				7B0E02182BB54BCB009BEEA6 /* NowWeatherAppWidget */,
+				7B0E02182BB54BCB009BEEA6 /* NowWeatherWidget */,
 				7B0E02132BB54BCB009BEEA6 /* Frameworks */,
 				7B3F3B6C2BA0A01300875CDF /* Products */,
 			);
@@ -161,10 +167,12 @@
 				7BF4D97A2BC98D6400CAA933 /* Font */,
 				7BF4D9772BC9833100CAA933 /* ViewModel */,
 				7BF4D9742BC97C4D00CAA933 /* Utils */,
-				7B8BA1792BA4270A004B6788 /* WeatherApp.entitlements */,
+				7B8BA1792BA4270A004B6788 /* NowWeather.entitlements */,
+				7B2FFC112BE89ADA0065AD18 /* lottieAnimation.json */,
 				7B8BA15F2BA0AC7D004B6788 /* View */,
 				7B3F3B7F2BA0A79000875CDF /* Managers */,
 				7B3F3B6E2BA0A01300875CDF /* NowWeatherApp.swift */,
+				7B2FFC152BE89DB60065AD18 /* AnimationView.swift */,
 				7B3F3B722BA0A01500875CDF /* Assets.xcassets */,
 				7B3F3B742BA0A01500875CDF /* Preview Content */,
 			);
@@ -265,6 +273,9 @@
 				7B0E02212BB54BCD009BEEA6 /* PBXTargetDependency */,
 			);
 			name = NowWeather;
+			packageProductDependencies = (
+				7B2FFC0F2BE89A650065AD18 /* Lottie */,
+			);
 			productName = WeatherApp;
 			productReference = 7B3F3B6B2BA0A01300875CDF /* NowWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -296,6 +307,9 @@
 				Base,
 			);
 			mainGroup = 7B3F3B622BA0A01300875CDF;
+			packageReferences = (
+				7B2FFC0E2BE89A650065AD18 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 7B3F3B6C2BA0A01300875CDF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -320,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BF4D9892BC98DCE00CAA933 /* Pretendard-SemiBold.ttf in Resources */,
+				7B2FFC122BE89ADA0065AD18 /* lottieAnimation.json in Resources */,
 				7B3F3B762BA0A01500875CDF /* Preview Assets.xcassets in Resources */,
 				7BF4D98B2BC98DCE00CAA933 /* Pretendard-Bold.ttf in Resources */,
 				7BF4D9862BC98DCE00CAA933 /* Pretendard-Regular.ttf in Resources */,
@@ -338,7 +353,7 @@
 				7B2FFC022BDFC0570065AD18 /* SmallWidgetView.swift in Sources */,
 				7B8F7C2F2BCD240500332FA4 /* LocationManager.swift in Sources */,
 				7B2FFC082BDFDA0C0065AD18 /* WeatherManager.swift in Sources */,
-				7B542FBB2BB6D32C00156693 /* NowWeatherAppWidget.swift in Sources */,
+				7B542FBB2BB6D32C00156693 /* NowWeatherWidget.swift in Sources */,
 				7B2FFC092BE1140A0065AD18 /* CelciusFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +373,7 @@
 				7BF4D9732BC97B3A00CAA933 /* DayFormatter.swift in Sources */,
 				7B8BA1742BA0B239004B6788 /* WeatherUtils.swift in Sources */,
 				7BF4D9792BC9839A00CAA933 /* CelciusFormatter.swift in Sources */,
+				7B2FFC162BE89DB60065AD18 /* AnimationView.swift in Sources */,
 				7BF4D96A2BC96FF200CAA933 /* WeeklyWeatherView.swift in Sources */,
 				7B3F3B6F2BA0A01300875CDF /* NowWeatherApp.swift in Sources */,
 			);
@@ -379,13 +395,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WeatherAppWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NowWeatherWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JRDC32KNLZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherAppWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WeatherAppWidget;
+				INFOPLIST_FILE = NowWeatherWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NowWeatherWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -408,13 +424,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = WeatherAppWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NowWeatherWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JRDC32KNLZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherAppWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WeatherAppWidget;
+				INFOPLIST_FILE = NowWeatherWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NowWeatherWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -557,21 +573,22 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WeatherApp/WeatherApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NowWeather/NowWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"NowWeather/Preview Content\"";
 				DEVELOPMENT_TEAM = JRDC32KNLZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherApp/Info.plist;
+				INFOPLIST_FILE = NowWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "지금날씨";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -591,21 +608,22 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = WeatherApp/WeatherApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NowWeather/NowWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"NowWeather/Preview Content\"";
 				DEVELOPMENT_TEAM = JRDC32KNLZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherApp/Info.plist;
+				INFOPLIST_FILE = NowWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "지금날씨";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "I am using weather APp";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -650,6 +668,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B2FFC0E2BE89A650065AD18 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B2FFC0F2BE89A650065AD18 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B2FFC0E2BE89A650065AD18 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7B3F3B632BA0A01300875CDF /* Project object */;
 }

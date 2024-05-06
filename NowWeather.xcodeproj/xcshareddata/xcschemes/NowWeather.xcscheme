@@ -82,7 +82,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "WeatherApp"
+      customArchiveName = "NowWeather"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

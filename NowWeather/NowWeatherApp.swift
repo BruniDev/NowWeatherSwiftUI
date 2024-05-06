@@ -25,9 +25,25 @@ class AppDelegate : UIResponder,UIApplicationDelegate, UNUserNotificationCenterD
 
 @main
 struct WeatherAppApp: App {
+    @StateObject private var viewModel = ContentViewViewModel()
+    @State var isSplashView = true
     var body: some Scene {
         WindowGroup {
-            ContentView()
+              if isSplashView {
+                LottieView(animationFileName: "lottieAnimation", loopMode: .playOnce)
+                    .ignoresSafeArea()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
+                            isSplashView = false
+                        }
+                    }
+            }else{
+                ContentView()
+                    .task {
+                        await viewModel.weatherManager.requestWeatherForCurrentLocation()
+                    }
+                    .environmentObject(viewModel)
+            }
         }
     }
 }

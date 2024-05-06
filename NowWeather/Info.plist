@@ -12,9 +12,6 @@
 		<string>Pretendard-Medium.ttf</string>
 	</array>
 	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIImageName</key>
-		<string>applogo</string>
-	</dict>
+	<dict/>
 </dict>
 </plist>
