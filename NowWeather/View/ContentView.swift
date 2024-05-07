@@ -36,6 +36,9 @@ struct ContentView: View {
                         WeeklyWeatherView(weather: weather,weatherUtils: WeatherUtils())
                     }
                 }
+                .refreshable {
+                    await viewModel.weatherManager.requestWeatherForCurrentLocation()
+                }
                 .ignoresSafeArea(.all)
                 .background {
                     WeatherUtils.getWeatherBackground(condition: weather.currentWeather.condition.description)
@@ -43,13 +46,17 @@ struct ContentView: View {
                         .ignoresSafeArea()
                 }
                 .scrollIndicators(.hidden)
+                
             }
+          
         }
         .task {
             morningSetNotification()
             nightSetNotification()
         }
+        
     }
+
     func morningSetNotification() {
         if let defaults = UserDefaults(suiteName: "group.com.brunidev.weatherWhat") {
             let manager = NotificationManager()
