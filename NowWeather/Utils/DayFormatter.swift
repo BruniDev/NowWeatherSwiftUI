@@ -10,7 +10,7 @@ import Foundation
 func dayFormatter(date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ko_KR")
-    dateFormatter.dateFormat = "EEEE"
+    dateFormatter.dateFormat = "E MM.dd"
     
     return dateFormatter.string(from: date)
 }
